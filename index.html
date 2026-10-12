@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tres en Raya — Tic-Tac-Toe & Conecta-N</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <h1>TRES EN <span class="accent-text">RAYA</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.22" x2="5.64" y2="17.78"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Layout -->
+        <main class="game-layout">
+            <!-- Left Panel / Game Controls & Info -->
+            <section class="side-panel">
+                <div class="card settings-card">
+                    <h2>Modo de Juego</h2>
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="pvp">2 Jugadores</button>
+                        <button class="mode-btn" data-mode="cpu">vs CPU</button>
+                    </div>
+
+                    <div id="difficulty-wrapper" class="difficulty-wrapper hidden">
+                        <h3>Dificultad CPU</h3>
+                        <div class="difficulty-selector">
+                            <button class="diff-btn active" data-difficulty="easy">Fácil</button>
+                            <button class="diff-btn" data-difficulty="hard">Difícil (Minimax)</button>
+                        </div>
+                    </div>
+
+                    <h3>Tamaño del Tablero</h3>
+                    <div class="size-selector">
+                        <button class="size-btn active" data-size="3">3×3 (3 en línea)</button>
+                        <button class="size-btn" data-size="4">4×4 (4 en línea)</button>
+                        <button class="size-btn" data-size="5">5×5 (4 en línea)</button>
+                    </div>
+
+                    <button id="new-game-btn" class="primary-btn">Nueva Partida</button>
+                </div>
+
+                <div class="card stats-card">
+                    <div class="stat-item">
+                        <span class="stat-label">Turno Actual</span>
+                        <div class="stat-value turn-display" id="turn-display">
+                            <span class="turn-mark" id="turn-mark">X</span>
+                            <span class="turn-text" id="turn-text">Jugador 1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card score-card">
+                    <h2>Marcador</h2>
+                    <div class="score-row">
+                        <div class="score-item">
+                            <span class="score-mark x-mark">X</span>
+                            <span class="score-value" id="score-x">0</span>
+                            <span class="score-label" id="label-x">Jugador 1</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-mark draw-mark">=</span>
+                            <span class="score-value" id="score-draw">0</span>
+                            <span class="score-label">Empates</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-mark o-mark">O</span>
+                            <span class="score-value" id="score-o">0</span>
+                            <span class="score-label" id="label-o">Jugador 2</span>
+                        </div>
+                    </div>
+                    <button id="reset-score-btn" class="secondary-btn">Reiniciar Marcador</button>
+                </div>
+            </section>
+
+            <!-- Center/Right Panel: The Board -->
+            <section class="board-panel">
+                <div class="board-wrapper">
+                    <div id="game-board" class="game-board grid-3x3">
+                        <!-- Celdas generadas dinámicamente -->
+                        <svg id="win-line" class="win-line" xmlns="http://www.w3.org/2000/svg"></svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Result Modal -->
+        <div id="result-modal" class="modal-overlay hidden">
+            <div class="modal-content text-center">
+                <div id="result-icon" class="result-icon">🏆</div>
+                <h2 id="result-title">¡Victoria!</h2>
+                <p class="modal-subtitle" id="result-subtitle">El Jugador X ha ganado la partida.</p>
+                <div class="modal-actions">
+                    <button id="modal-play-again-btn" class="primary-btn">Jugar de Nuevo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entrypoint -->
+    <script src="script.js"></script>
+</body>
+</html>
